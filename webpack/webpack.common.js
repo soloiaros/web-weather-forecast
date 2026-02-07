@@ -8,9 +8,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
-  plugins: [
-    new HtmlWebpackPlugin({ template: "./src/template.html" }),
-  ],
+  plugins: [new HtmlWebpackPlugin({ template: "./src/template.html" })],
   module: {
     rules: [
       {
@@ -19,10 +17,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: [
-          "style-loader",
-          "css-loader",
-        ],
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.(png|jpeg|jpg|svg|ico)$/i,
