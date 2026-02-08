@@ -1,67 +1,128 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pretty Weather</title>
-</head>
-<body>
-  <main>
-    <div class="top-section">
-      <div class="search-area">
-        <div class="search-container">
-          <input type="text">
-          <span class="error"></span>
-        </div>
-        <button></button>
-      </div>
-      <div class="switch">
-        <label for="degree-switch" class="label-celcius">°C</label>
-        <input id="degree-switch" type="checkbox">
-        <label for="degree-switch" class="label-fahrenheit">°F</label>
-      </div>
-    </div>
-    <div class="widget-grid">
-      <div class="widget big rect" id="place-widget">
-        <div class="text-icon">
-          <div class="info-sub-info">
-            <p class="heading"></p><p class="regular"></p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pretty Weather</title>
+  </head>
+  <body>
+    <main>
+      <div class="top-section">
+        <div class="search-area">
+          <div class="search-container">
+            <input type="text" />
+            <span class="error"></span>
           </div>
-          <div class="icon"></div>
+          <button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="65"
+              height="65"
+              viewBox="0 0 65 65"
+              fill="none"
+            >
+              <rect
+                x="1.5"
+                y="1.5"
+                width="62"
+                height="62"
+                rx="31"
+                fill="white"
+                fill-opacity="0.2"
+                stroke="#171717"
+                stroke-width="3"
+              />
+              <path
+                d="M47.9433 45.4348L40.9295 38.418C43.0325 35.6776 44.0143 32.2398 43.6758 28.8021C43.3373 25.3644 41.7039 22.1841 39.1068 19.9065C36.5097 17.6288 33.1435 16.4243 29.691 16.5373C26.2385 16.6503 22.9582 18.0723 20.5157 20.5149C18.0731 22.9575 16.651 26.2378 16.538 29.6903C16.4251 33.1428 17.6296 36.509 19.9072 39.106C22.1849 41.7031 25.3651 43.3366 28.8028 43.6751C32.2406 44.0136 35.6783 43.0317 38.4188 40.9288L45.4385 47.95C45.6034 48.1148 45.7991 48.2456 46.0145 48.3348C46.2299 48.4241 46.4607 48.47 46.6939 48.47C46.927 48.47 47.1579 48.4241 47.3733 48.3348C47.5887 48.2456 47.7844 48.1148 47.9492 47.95C48.1141 47.7851 48.2449 47.5894 48.3341 47.374C48.4233 47.1586 48.4692 46.9278 48.4692 46.6946C48.4692 46.4615 48.4233 46.2306 48.3341 46.0152C48.2449 45.7998 48.1141 45.6041 47.9492 45.4392L47.9433 45.4348ZM20.1051 30.1474C20.1051 28.161 20.6941 26.2193 21.7977 24.5678C22.9012 22.9162 24.4697 21.629 26.3048 20.8689C28.1399 20.1087 30.1592 19.9099 32.1074 20.2974C34.0555 20.6849 35.845 21.6414 37.2495 23.0459C38.6541 24.4504 39.6106 26.2399 39.9981 28.1881C40.3856 30.1362 40.1867 32.1555 39.4266 33.9906C38.6665 35.8257 37.3792 37.3942 35.7277 38.4978C34.0761 39.6013 32.1344 40.1903 30.1481 40.1903C27.4854 40.1876 24.9325 39.1286 23.0497 37.2458C21.1668 35.363 20.1079 32.8101 20.1051 30.1474Z"
+                fill="#171717"
+              />
+            </svg>
+          </button>
         </div>
-        <div class="summary"></div>
+        <div class="switch">
+          <label for="degree-switcher" class="label-celcius">°C</label>
+          <input id="degree-switcher" type="checkbox" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="86"
+            height="28"
+            viewBox="0 0 86 28"
+            fill="none"
+          >
+            <rect
+              x="1"
+              y="1"
+              width="83.755"
+              height="25.8776"
+              rx="12.9388"
+              fill="#C6CEDE"
+              stroke="black"
+              stroke-width="2"
+            />
+            <rect
+              x="12.7687"
+              y="13.2408"
+              width="60.2177"
+              height="2.27344"
+              rx="1.13672"
+              fill="#171717"
+            />
+            <circle
+              class="left"
+              id="toggle-head"
+              cx="14"
+              cy="14"
+              r="10"
+              fill="#171717"
+            />
+          </svg>
+          <label for="degree-switcher" class="label-fahrenheit">°F</label>
+        </div>
       </div>
-      <div class="widget small rect" id="sun-widget">
-        <div class="text-icon">
-          <div class="info-sub-info">
-            <p class="heading"></p><p class="regular"></p>
+      <div class="widget-grid">
+        <div class="widget big rect" id="place-widget">
+          <div class="text-icon">
+            <div class="info-sub-info">
+              <p class="heading"></p>
+              <p class="regular"></p>
+            </div>
+            <div class="icon"></div>
           </div>
-          <div class="icon"></div>
+          <div class="summary"></div>
         </div>
-      </div>
-      <div class="widget small square" id="precip-widget">
-        <p class="regular"></p>
-        <div class="text-icon">
-          <p class="extra"></p>
-          <div class="icon"></div>
-        </div>
-      </div>
-      <div class="widget small square" id="uv-widget">
-        <p class="regular"></p>
-        <div class="text-icon">
-          <p class="extra"></p>
-          <div class="icon"></div>
-        </div>
-      </div>
-      <div class="widget small rect" id="wind-widget">
-        <div class="text-icon">
-          <div class="info-sub-info">
-            <p class="heading"></p><p class="regular"></p>
+        <div class="widget small rect" id="sun-widget">
+          <div class="text-icon">
+            <div class="info-sub-info">
+              <p class="heading"></p>
+              <p class="regular"></p>
+            </div>
+            <div class="icon"></div>
           </div>
-          <div class="icon"></div>
+        </div>
+        <div class="widget small square" id="precip-widget">
+          <p class="regular"></p>
+          <div class="text-icon">
+            <p class="extra"></p>
+            <div class="icon"></div>
+          </div>
+        </div>
+        <div class="widget small square" id="uv-widget">
+          <p class="regular"></p>
+          <div class="text-icon">
+            <p class="extra"></p>
+            <div class="icon"></div>
+          </div>
+        </div>
+        <div class="widget small rect" id="wind-widget">
+          <div class="text-icon">
+            <div class="info-sub-info">
+              <p class="heading"></p>
+              <p class="regular"></p>
+            </div>
+            <div class="icon"></div>
+          </div>
         </div>
       </div>
-    </div>
-  </main>
-</body>
+    </main>
+  </body>
 </html>

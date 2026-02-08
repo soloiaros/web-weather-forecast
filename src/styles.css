@@ -1,17 +1,25 @@
-body {
+* {
   box-sizing: border-box;
+}
+
+body {
   padding: 0;
   margin: 0;
-  --bg-body: #C6CEDE;
-  --text-light: #F6F6F4;
+  --bg-body: #c6cede;
+  --text-light: #f6f6f4;
   --text-dark: #171717;
+  --text-insignificant: #636363;
   --bg-interactive-elem: #ffffff40;
+  --font-headings: 700 2.5rem "Karla";
+  --font-regular: 500 2rem "Karla";
+  --font-extra: 400 1.25rem "Karla";
+  --font-insignificant: 400 1rem "Karla";
 }
 
 .widget {
-  --bg-rain: #7EADDF;
-  --bg-sun: #FFFFE6;
-  --bg-overcast: #E9E9E9;
+  --bg-rain: #7eaddf;
+  --bg-sun: #ffffe6;
+  --bg-overcast: #e9e9e9;
 }
 
 main {
@@ -25,11 +33,34 @@ main {
   display: flex;
   justify-content: space-between;
   padding: 5rem 8rem;
-  
 }
 
 .search-area {
   display: flex;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.search-area input {
+  font-size: 1rem;
+  padding: 0.75rem 2rem;
+  border-radius: 3.125rem;
+  border: 3px solid var(--text-dark, #171717);
+  background: var(--bg-interactive-elem, rgba(255, 255, 255, 0.2));
+}
+
+.search-area button {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+}
+
+.search-area button svg {
+  width: 100%;
+  height: 100%;
 }
 
 .search-container {
@@ -43,10 +74,51 @@ main {
   height: 100%;
   display: none;
   background-color: orange;
+  font: var(--font-extra);
+}
+
+.top-section .switch {
+  display: flex;
+  height: 3rem;
+  padding: 0.5rem 0.75rem 0.5rem 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.625rem;
+  border-radius: 1rem;
+  border: 3px solid var(--text-dark, #171717);
+  background: var(--bg-interactive-elem, rgba(255, 255, 255, 0.2));
+  position: relative;
+}
+
+.top-section .switch label {
+  color: var(--text-dark);
+  font: var(--font-headings);
+}
+
+.top-section .switch input {
+  appearance: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#toggle-head {
+  transition: all 300ms cubic-bezier(0.68, -0.3, 0.27, 1.3);
+}
+
+#toggle-head.left {
+  cx: 14;
+}
+
+#toggle-head.right {
+  cx: 71.5;
 }
 
 .widget-grid {
   display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   grid-template-areas:
     "place place place place   sun      sun "
     "place place place place   precip   uv  "
@@ -57,6 +129,12 @@ main {
 
 .widget {
   border: 1px solid black;
+  /* display: grid; */
+  padding: 1.75rem;
+  gap: 0.625rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 150ms ease-in-out;
 }
 
 .widget.square {
@@ -69,6 +147,22 @@ main {
 
 .widget.big.rect {
   grid-area: place;
+}
+
+.widget.rain {
+  background: var(--bg-rain, #7eaddf);
+}
+
+.widget.sun {
+  background: var(--bg-sun, #ffffe6);
+}
+
+.widget.overcast {
+  background: var(--bg-overcast, #e9e9e9);
+}
+
+.widget.skeleton {
+  background: #fff;
 }
 
 #place-widget {
@@ -91,14 +185,12 @@ main {
   grid-area: wind;
 }
 
-
 @media screen and (max-width: 900px) {
   .widget-grid {
-    grid-template-areas: 
+    grid-template-areas:
       "place place place place"
       "place place place place"
       "sun   sun   uv    precip"
       "wind  wind  ...   .....";
   }
 }
-  
