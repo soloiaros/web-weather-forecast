@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pretty Weather</title>
+</head>
+<body>
+  <main>
+    <div class="top-section">
+      <div class="search-area">
+        <div class="search-container">
+          <input type="text">
+          <span class="error"></span>
+        </div>
+        <button></button>
+      </div>
+      <div class="switch">
+        <label for="degree-switch" class="label-celcius">°C</label>
+        <input id="degree-switch" type="checkbox">
+        <label for="degree-switch" class="label-fahrenheit">°F</label>
+      </div>
+    </div>
+    <div class="widget-grid">
+      <div class="widget big rect" id="place-widget">
+        <div class="text-icon">
+          <div class="info-sub-info">
+            <p class="heading"></p><p class="regular"></p>
+          </div>
+          <div class="icon"></div>
+        </div>
+        <div class="summary"></div>
+      </div>
+      <div class="widget small rect" id="sun-widget">
+        <div class="text-icon">
+          <div class="info-sub-info">
+            <p class="heading"></p><p class="regular"></p>
+          </div>
+          <div class="icon"></div>
+        </div>
+      </div>
+      <div class="widget small square" id="precip-widget">
+        <p class="regular"></p>
+        <div class="text-icon">
+          <p class="extra"></p>
+          <div class="icon"></div>
+        </div>
+      </div>
+      <div class="widget small square" id="uv-widget">
+        <p class="regular"></p>
+        <div class="text-icon">
+          <p class="extra"></p>
+          <div class="icon"></div>
+        </div>
+      </div>
+      <div class="widget small rect" id="wind-widget">
+        <div class="text-icon">
+          <div class="info-sub-info">
+            <p class="heading"></p><p class="regular"></p>
+          </div>
+          <div class="icon"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

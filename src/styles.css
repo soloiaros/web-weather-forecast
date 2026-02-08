@@ -1,0 +1,104 @@
+body {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  --bg-body: #C6CEDE;
+  --text-light: #F6F6F4;
+  --text-dark: #171717;
+  --bg-interactive-elem: #ffffff40;
+}
+
+.widget {
+  --bg-rain: #7EADDF;
+  --bg-sun: #FFFFE6;
+  --bg-overcast: #E9E9E9;
+}
+
+main {
+  background-color: var(--bg-body);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 4rem;
+}
+
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  padding: 5rem 8rem;
+  
+}
+
+.search-area {
+  display: flex;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.search-container .error {
+  width: 100%;
+  height: 100%;
+  display: none;
+  background-color: orange;
+}
+
+.widget-grid {
+  display: grid;
+  grid-template-areas:
+    "place place place place   sun      sun "
+    "place place place place   precip   uv  "
+    "..... ..... ..... .....   wind     wind";
+  padding: 0 5rem;
+  gap: 1.25rem;
+}
+
+.widget {
+  border: 1px solid black;
+}
+
+.widget.square {
+  aspect-ratio: 1 / 1;
+}
+
+.widget.rect {
+  aspect-ratio: 2 / 1;
+}
+
+.widget.big.rect {
+  grid-area: place;
+}
+
+#place-widget {
+  grid-area: place;
+}
+
+#sun-widget {
+  grid-area: sun;
+}
+
+#precip-widget {
+  grid-area: precip;
+}
+
+#uv-widget {
+  grid-area: uv;
+}
+
+#wind-widget {
+  grid-area: wind;
+}
+
+
+@media screen and (max-width: 900px) {
+  .widget-grid {
+    grid-template-areas: 
+      "place place place place"
+      "place place place place"
+      "sun   sun   uv    precip"
+      "wind  wind  ...   .....";
+  }
+}
+  
