@@ -32,6 +32,7 @@ async function getWeatherData(request) {
         icon: weatherData.days[0].icon,
         sunrise: weatherData.days[0].sunrise,
         sunset: weatherData.days[0].sunset,
+        datetime: weatherData.currentConditions.datetime,
         summary: weatherData.days[0].description,
         windspeed: weatherData.days[0].windspeed,
         winddir: weatherData.days[0].winddir,

@@ -1,3 +1,4 @@
+import { compareAsc, compareDesc, differenceInMilliseconds, hoursToMilliseconds, hoursToSeconds, isWithinInterval, minutesToMilliseconds, toDate } from "date-fns";
 import searchPlace from "./api-fetch";
 import "./styles.css";
 
@@ -25,6 +26,9 @@ function displaySkeletonWidgets() {
   const widgets = document.querySelectorAll(".widget");
   for (let widget of widgets) {
     widget.classList.add("skeleton");
+    if (widget.id === 'sun-widget') {
+      widget.querySelector('.icon svg').style.setProperty('--rotate-angle', 0);
+    }
   }
 }
 
@@ -75,4 +79,36 @@ function fillOutWidgets(weatherData) {
     widgetPlace.querySelector('.icon').innerHTML = icon.default;
   });
   
+  const widgetSun = document.getElementById('sun-widget');
+  widgetSun.querySelector('.icon > svg').style['display'] = 'block';
+  const sunAngle = getSunAngle(weatherData.today.sunrise, weatherData.today.sunset, weatherData.today.datetime);
+  widgetSun.querySelector('.icon > svg').style.setProperty('--rotate-angle', sunAngle);
+  widgetSun.querySelector('.icon > svg').style['transform'] = `rotate(${sunAngle}deg)`;
+
+  widgetSun.querySelector('p.sunrise').textContent = `Sunrise: ${weatherData.today.sunrise.slice(0, -3)}`;
+  widgetSun.querySelector('p.sunset').textContent = `Sunset: ${weatherData.today.sunset.slice(0, -3)}`;
+
+}
+
+function getSunAngle (sunrise, sunset, datetime) {
+  const sunriseTime = new Date(`2000-10-10T${sunrise}`);
+  const sunsetTime = new Date(`2000-10-10T${sunset}`);
+  const currentTime = new Date(`2000-10-10T${datetime}`);
+  
+  const totalMS = hoursToMilliseconds(24);
+  const sunUpMS = differenceInMilliseconds(sunsetTime, sunriseTime);
+  const moonUpMS = totalMS - sunUpMS;
+  const currentMS = hoursToMilliseconds(currentTime.getHours()) + minutesToMilliseconds(currentTime.getMinutes());
+  const sunriseMS = hoursToMilliseconds(sunriseTime.getHours()) + minutesToMilliseconds(sunriseTime.getMinutes());
+  const sunsetMS = hoursToMilliseconds(sunsetTime.getHours()) + minutesToMilliseconds(sunsetTime.getMinutes());
+
+  if (isWithinInterval(currentTime, {
+    start: sunriseTime,
+    end: sunsetTime})) {
+      const fraction = currentMS - sunriseMS;
+      return (fraction / sunUpMS) * 90 - 45;
+  } else {
+    const fraction = currentMS > sunUpMS ? currentMS - sunsetMS : currentMS + totalMS - sunsetMS;
+    return (fraction / moonUpMS) * 180 + 135;
+  }
 }
