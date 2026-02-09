@@ -20,8 +20,12 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(png|jpeg|jpg|svg|ico)$/i,
+        test: /\.(png|jpeg|jpg|ico)$/i,
         type: "asset/resource",
+      },
+      {
+        test: /\.svg$/,
+        type: 'asset/source',
       },
       {
         test: /\.(woff|woff2|ttf|otf|eot)$/i,

@@ -12,6 +12,7 @@ export default async function searchPlace(place) {
   const params = new URLSearchParams();
   params.append("key", WEATHER_API);
   params.append("location", place);
+  params.append('iconSet', 'icons2');
 
   const request = new Request(
     `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline?${params}`,
@@ -24,6 +25,7 @@ async function getWeatherData(request) {
   const response = await fetch(request);
   if (response.ok) {
     const weatherData = await response.json();
+    console.log(weatherData)
     const returnData = {
       location: weatherData.address,
       today: {

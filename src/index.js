@@ -23,7 +23,6 @@ degreeSwitcher.addEventListener("click", () => {
 
 function displaySkeletonWidgets() {
   const widgets = document.querySelectorAll(".widget");
-  console.log(widgets);
   for (let widget of widgets) {
     widget.classList.add("skeleton");
   }
@@ -32,6 +31,29 @@ function displaySkeletonWidgets() {
 function fillOutWidgets(weatherData) {
   const widgets = document.querySelectorAll(".widget");
   const possibleStates = ["skeleton", "sun", "rain", "overcast"];
+  const backgroundStates = {
+    'rain': ['thunder-rain', 'thunder-showers-day', 'thunder-showers-night', 'rain', 'showers-day', 'showers-night'],
+    'sun': ['clear-day', 'clear-night'],
+    'overcast': ['snow', 'snow-showers-day', 'snow-showers-night', 'fog', 'wind', 'cloudy', 'partly-cloudy-day', 'partly-cloudy-night'],
+  }
+  const iconSubstituteNames = {
+    'snow': 'snow',
+    'snow-showers-day': 'snowy-sunny',
+    'snow-showers-night': 'snow',
+    'thunder-rain': 'thunder',
+    'thunder-showers-day': 'thunder',
+    'thunder-showers-night': 'thunder',
+    'rain': 'rainy',
+    'showers-day': 'rainy-sunny',
+    'showers-night': 'rain',
+    'fog': 'cloudy',
+    'wind': 'cloudy',
+    'cloudy': 'cloudy',
+    'partly-cloudy-day': 'cloudy-sunny',
+    'partly-cloudy-night': 'cloudy-night',
+    'clear-day': 'sunny',
+    'clear-night': 'night',
+  }
   for (let widget of widgets) {
     const currentClasses = [...widget.classList];
     for (let widClass of currentClasses) {
@@ -39,12 +61,18 @@ function fillOutWidgets(weatherData) {
         widget.classList.remove(widClass);
       }
     }
-    if (weatherData.today.icon === "rain") {
-      widget.classList.add("rain");
-    } else if (weatherData.today.icon === "sunny") {
-      widget.classList.add("sun");
-    } else {
-      widget.classList.add("overcast");
+    for (let state in backgroundStates) {
+      if (backgroundStates[state].includes(weatherData.today.icon)) {
+        widget.classList.add(state);
+      }
     }
   }
+
+  const widgetPlace = document.getElementById('place-widget');
+  widgetPlace.querySelector('.summary').textContent = weatherData.today.summary;
+  widgetPlace.querySelector('.city').textContent = weatherData.location;
+  import(`./icons/${iconSubstituteNames[weatherData.today.icon]}.svg`).then((icon) => {
+    widgetPlace.querySelector('.icon').innerHTML = icon.default;
+  });
+  
 }
