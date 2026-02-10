@@ -11,6 +11,12 @@ btnSearch.addEventListener("click", async function () {
   initiateSearch();
 });
 
+inputBox.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    initiateSearch();
+  }
+})
+
 const degreeSwitcher = document.getElementById("degree-switcher");
 degreeSwitcher.addEventListener("click", () => {
   if (degreeSwitcher.checked) {
