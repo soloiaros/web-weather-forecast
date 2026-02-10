@@ -21,8 +21,9 @@ degreeSwitcher.addEventListener("click", () => {
   initiateSearch();
 });
 
-async function initiateSearch() {
-  const requestedPlace = inputBox.value;
+async function initiateSearch(place = null) {
+  const requestedPlace = place ? place : inputBox.value;
+  inputBox.value = requestedPlace;
   displaySkeletonWidgets();
   const weatherData = await searchPlace(requestedPlace);
   const degrees = toggleHead.classList.contains('left') ? 'C' : 'F';
@@ -109,9 +110,11 @@ function fillOutWidgets(weatherData, degrees) {
   widgetTemp.querySelector('.highest').textContent = degrees === 'F' ? `${weatherData.today.tempmax} °F` : `${Math.round((weatherData.today.tempmax - 32) * 5 / 9 * 10) / 10} °C`;
   const tempIcon = weatherData.today.temp < 32 ? 'temp-min' : weatherData.today.temp < 77 ? 'temp-mid' : 'temp-max';
   widgetTemp.querySelector('.icon svg path').setAttribute('d', tempIconStates[tempIcon]);
+  Array.from(widgetTemp.getElementsByTagName('svg')).forEach((icon) => { icon.style['display'] = 'block' });
 
   const widgetWind = document.getElementById('wind-widget');
   widgetWind.querySelector('.icon svg').style['transform'] = `rotate(${weatherData.today.winddir}deg)`;
+  widgetWind.querySelector('.icon svg').style['display'] = 'block';
   const windSpeedString = weatherData.today.windspeed < 18 ? 'light' : weatherData.windspeed < 46 ? 'moderate' : 'high';
   widgetWind.querySelector('p').textContent = `Wind speed is ${windSpeedString}`;
 }
@@ -138,3 +141,7 @@ function getSunAngle (sunrise, sunset, datetime) {
     return (fraction / moonUpMS) * 180 + 135;
   }
 }
+
+
+const defaultPlaces = ['New York', 'London', 'Mumbai', 'Istanbul', 'Toronto', 'Reykjavik'];
+initiateSearch(defaultPlaces[Math.floor(Math.random() * defaultPlaces.length)]);
