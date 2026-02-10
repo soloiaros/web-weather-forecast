@@ -196,7 +196,7 @@ main {
       --rotate-angle: 0;
       width: calc(75% + 1vw);
       transform: rotate(var(--rotate-angle)deg);
-      transition: transform 1s ease-in-out;
+      transition: transform .5s ease-in-out;
     }
   }
   & p {
