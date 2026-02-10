@@ -123,8 +123,8 @@ main {
   grid-template-columns: repeat(6, minmax(0, 1fr));
   grid-template-areas:
     "place place place place   sun      sun "
-    "place place place place   precip   uv  "
-    "..... ..... ..... .....   wind     wind";
+    "place place place place   precip   wind  "
+    "..... ..... ..... .....   uv       uv";
   padding: 0 5rem;
   gap: 1.25rem;
 }
@@ -235,6 +235,18 @@ main {
 
 #wind-widget {
   grid-area: wind;
+  display: grid;
+  grid-template-rows: 5fr 1fr;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  & .icon {
+    justify-self: center;
+    & svg {
+     width: 100%;
+     height: 100%;
+     transition: all 0.4s ease-in-out; 
+   }
+  }
 }
 
 .widget .info-sub-info {
@@ -256,8 +268,8 @@ main {
     grid-template-areas:
       "place place place place"
       "place place place place"
-      "sun   sun   uv    precip"
-      "wind  wind  ...   .....";
+      "sun   sun   wind    precip"
+      "uv  uv  ...   .....";
     width: 100%;
   }
   

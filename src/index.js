@@ -108,6 +108,11 @@ function fillOutWidgets(weatherData, degrees) {
   widgetTemp.querySelector('.highest').textContent = degrees === 'F' ? `${weatherData.today.tempmax} °F` : `${Math.round((weatherData.today.tempmax - 32) * 5 / 9 * 10) / 10} °C`;
   const tempIcon = weatherData.today.temp < 32 ? 'temp-min' : weatherData.today.temp < 77 ? 'temp-mid' : 'temp-max';
   widgetTemp.querySelector('.icon svg path').setAttribute('d', tempIconStates[tempIcon]);
+
+  const widgetWind = document.getElementById('wind-widget');
+  widgetWind.querySelector('.icon svg').style['transform'] = `rotate(${weatherData.today.winddir}deg)`;
+  const windSpeedString = weatherData.today.windspeed < 18 ? 'light' : weatherData.windspeed < 46 ? 'moderate' : 'high';
+  widgetWind.querySelector('p').textContent = `Weather speed is ${windSpeedString}`;
 }
 
 function getSunAngle (sunrise, sunset, datetime) {
