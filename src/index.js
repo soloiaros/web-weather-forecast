@@ -1,5 +1,6 @@
 import { compareAsc, compareDesc, differenceInMilliseconds, hoursToMilliseconds, hoursToSeconds, isWithinInterval, minutesToMilliseconds, toDate } from "date-fns";
 import searchPlace from "./api-fetch";
+import "./fonts/stylesheet.css";
 import "./styles.css";
 
 const inputBox = document.querySelector("input");
@@ -112,7 +113,7 @@ function fillOutWidgets(weatherData, degrees) {
   const widgetWind = document.getElementById('wind-widget');
   widgetWind.querySelector('.icon svg').style['transform'] = `rotate(${weatherData.today.winddir}deg)`;
   const windSpeedString = weatherData.today.windspeed < 18 ? 'light' : weatherData.windspeed < 46 ? 'moderate' : 'high';
-  widgetWind.querySelector('p').textContent = `Weather speed is ${windSpeedString}`;
+  widgetWind.querySelector('p').textContent = `Wind speed is ${windSpeedString}`;
 }
 
 function getSunAngle (sunrise, sunset, datetime) {
