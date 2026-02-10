@@ -148,17 +148,6 @@ main {
   aspect-ratio: 2 / 1;
 }
 
-.widget.big.rect {
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  & .summary {
-    grid-column: 1 / span 2;
-    border-radius: 1rem;
-    border: 5px solid var(--text-light, #F6F6F4);
-    padding: 1rem;
-  }
-}
-
 .widget.rain {
   background: var(--bg-rain, #7eaddf);
 }
@@ -177,6 +166,20 @@ main {
 
 #place-widget {
   grid-area: place;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  & .summary {
+    grid-column: 1 / span 2;
+    border-radius: 1rem;
+    border: 5px solid var(--text-light, #F6F6F4);
+    padding: 1rem;
+  }
+  & .info-sub-info .time {
+    display: flex; 
+    justify-content: start;
+    align-items: center;
+    gap: 0.5rem;
+  }
 }
 
 #sun-widget {
@@ -205,8 +208,25 @@ main {
   }
 }
 
-#precip-widget {
+#temp-widget {
   grid-area: precip;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 5fr 1fr;
+  & .current {
+    grid-column: span 3;
+  }
+  & .small-temp-container {
+    grid-column: span 2;
+  }
+
+  & .icon > svg {
+    height: 100%;
+    width: 100%;
+  }
+  & .icon > svg > path {
+    transition: d .5s ease-in-out;
+  }
 }
 
 #uv-widget {

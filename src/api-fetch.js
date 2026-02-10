@@ -33,6 +33,7 @@ async function getWeatherData(request) {
         sunrise: weatherData.days[0].sunrise,
         sunset: weatherData.days[0].sunset,
         datetime: weatherData.currentConditions.datetime,
+        timezone: weatherData.timezone,
         summary: weatherData.days[0].description,
         windspeed: weatherData.days[0].windspeed,
         winddir: weatherData.days[0].winddir,
