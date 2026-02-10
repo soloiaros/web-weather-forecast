@@ -1,4 +1,4 @@
-import { compareAsc, compareDesc, differenceInMilliseconds, hoursToMilliseconds, hoursToSeconds, isWithinInterval, minutesToMilliseconds, toDate } from "date-fns";
+import { differenceInMilliseconds, hoursToMilliseconds, isWithinInterval, minutesToMilliseconds } from "date-fns";
 import searchPlace from "./api-fetch";
 import "./fonts/stylesheet.css";
 import "./styles.css";
@@ -28,13 +28,21 @@ degreeSwitcher.addEventListener("click", () => {
 });
 
 async function initiateSearch(place = null) {
+  const errorBox = document.querySelector('.error');
   const requestedPlace = place ? place : inputBox.value;
   inputBox.value = requestedPlace;
   displaySkeletonWidgets();
-  const weatherData = await searchPlace(requestedPlace);
   const degrees = toggleHead.classList.contains('left') ? 'C' : 'F';
+  const weatherData = await searchPlace(requestedPlace);
+  if (weatherData instanceof Error) {
+    errorBox.style.display = 'inline';
+    errorBox.textContent = 'Oopsiee.. An error occured while searching for your place :/';
+  } else {
+    errorBox.style.display = 'none';
+    errorBox.textContent = '';
+    fillOutWidgets(weatherData, degrees);
+  }
 
-  fillOutWidgets(weatherData, degrees);
 }
 
 function displaySkeletonWidgets() {

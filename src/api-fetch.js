@@ -22,35 +22,39 @@ export default async function searchPlace(place) {
 }
 
 async function getWeatherData(request) {
-  const response = await fetch(request);
-  if (response.ok) {
-    const weatherData = await response.json();
-    console.log(weatherData)
-    const returnData = {
-      location: weatherData.address,
-      today: {
-        icon: weatherData.days[0].icon,
-        sunrise: weatherData.days[0].sunrise,
-        sunset: weatherData.days[0].sunset,
-        datetime: weatherData.currentConditions.datetime,
-        timezone: weatherData.timezone,
-        summary: weatherData.days[0].description,
-        windspeed: weatherData.days[0].windspeed,
-        winddir: weatherData.days[0].winddir,
-        temp: weatherData.days[0].temp,
-        tempmax: weatherData.days[0].tempmax,
-        tempmin: weatherData.days[0].tempmin,
-      },
-    };
-    for (let i = 1; i < 7; i++) {
-      returnData[weatherData.days[i].datetime] = {};
-      returnData[weatherData.days[i].datetime]["icon"] =
-        weatherData.days[0].icon;
-      returnData[weatherData.days[i].datetime]["temp"] =
-        weatherData.days[0].temp;
+  try {
+    const response = await fetch(request);
+    if (response.ok) {
+      const weatherData = await response.json();
+      console.log(weatherData)
+      const returnData = {
+        location: weatherData.address,
+        today: {
+          icon: weatherData.days[0].icon,
+          sunrise: weatherData.days[0].sunrise,
+          sunset: weatherData.days[0].sunset,
+          datetime: weatherData.currentConditions.datetime,
+          timezone: weatherData.timezone,
+          summary: weatherData.days[0].description,
+          windspeed: weatherData.days[0].windspeed,
+          winddir: weatherData.days[0].winddir,
+          temp: weatherData.days[0].temp,
+          tempmax: weatherData.days[0].tempmax,
+          tempmin: weatherData.days[0].tempmin,
+        },
+      };
+      for (let i = 1; i < 7; i++) {
+        returnData[weatherData.days[i].datetime] = {};
+        returnData[weatherData.days[i].datetime]["icon"] =
+          weatherData.days[0].icon;
+        returnData[weatherData.days[i].datetime]["temp"] =
+          weatherData.days[0].temp;
+      }
+      return returnData;
+    } else {
+      return new HttpError(response);
     }
-    return returnData;
-  } else {
+  } catch (err) {
     return new HttpError(response);
   }
 }
