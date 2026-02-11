@@ -39,12 +39,13 @@ main {
   display: grid;
   grid-template-rows: auto 1fr;
   gap: 4rem;
+  padding-bottom: 5rem;
 }
 
 .top-section {
   display: flex;
   justify-content: space-between;
-  padding: 5rem 8rem;
+  padding: 5rem 8rem 2rem 8rem;
   gap: 3rem;
 }
 
