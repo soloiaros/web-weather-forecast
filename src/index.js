@@ -1,5 +1,5 @@
 import { differenceInMilliseconds, hoursToMilliseconds, isWithinInterval, minutesToMilliseconds } from "date-fns";
-import searchPlace from "./api-fetch";
+import searchPlace from "./api-fetch.mjs";
 import "./fonts/stylesheet.css";
 import "./styles.css";
 

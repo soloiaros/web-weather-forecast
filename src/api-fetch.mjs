@@ -1,6 +1,6 @@
 const WEATHER_API = "UKJY746W25RDE47ZPHE4RN3BL";
 
-class HttpError extends Error {
+export class HttpError extends Error {
   constructor(response) {
     super(`${response.status} for ${response.url}`);
     this.name = "HttpError";
@@ -26,7 +26,6 @@ async function getWeatherData(request) {
     const response = await fetch(request);
     if (response.ok) {
       const weatherData = await response.json();
-      console.log(weatherData)
       const returnData = {
         location: weatherData.address,
         today: {
